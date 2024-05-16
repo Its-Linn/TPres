@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption and Decryption Tool</title>
+</head>
+<body>
+    <h2>Tools Presensi UTY - Linn</h2>
+
+    <h3>Presensi To Format Presensi:</h3>
+    <label for="encryptedText">Kode Presensi:</label><br>
+    <textarea id="encryptedText" rows="4" cols="50"></textarea><br>
+    <button onclick="decryptText()">Convert</button><br>
+    <label for="decryptedText">Hasil:</label><br>
+    <textarea id="decryptedText" rows="4" cols="50" readonly></textarea><br>
+
+    <h3>Format to Kode Presensi:</h3>
+    <p>Format presensi biasanya = kodekelas,pertemuan,tahun-bulan-tanggal,darijam(x:x),sampaijam(x:x)</p>
+    <label for="plainText">Format Presensi:</label><br>
+    <textarea id="plainText" rows="4" cols="50"></textarea><br>
+    <button onclick="encryptText()">Convert</button><br>
+    <label for="encryptedOutput">Kode Presensi:</label><br>
+    <textarea id="encryptedOutput" rows="4" cols="50" readonly></textarea><br>
+
+
+    <!-- Menyertakan pustaka CryptoJS dari CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        function huruhara() {
+            return "xwbmrperu123";
+        }
+
+        function enhuuuu(text, shift) {
+            let result = '';
+
+            for (let i = 0; i < text.length; i++) {
+                let charCode = text.charCodeAt(i);
+
+                // Check if the character is a letter
+                if (charCode >= 65 && charCode <= 90) {
+                    result += String.fromCharCode((charCode - 65 + shift) % 26 + 65);
+                } else if (charCode >= 97 && charCode <= 122) {
+                    result += String.fromCharCode((charCode - 97 + shift) % 26 + 97);
+                } else {
+                    result += text[i]; // Keep non-alphabetic characters unchanged
+                }
+            }
+
+            return result;
+        }
+
+        function dehuuuu(text, shift) {
+            // Decryption is the same as encryption, just with a reversed shift
+            return enhuuuu(text, 26 - shift);
+        }
+
+        function encryptText() {
+            var plainText = document.getElementById("plainText").value;
+            var huuuur = huruhara();
+            const shiftValue = 3;
+            var huuu = dehuuuu(huuuur, shiftValue);
+
+            // Melakukan enkripsi teks
+            var encrypted = CryptoJS.AES.encrypt(plainText, huuu).toString();
+
+            // Menampilkan hasil enkripsi
+            document.getElementById("encryptedOutput").value = encrypted;
+        }
+
+        function decryptText() {
+            var encryptedText = document.getElementById("encryptedText").value;
+            var huuuur = huruhara();
+            const shiftValue = 3;
+            var huuu = dehuuuu(huuuur, shiftValue);
+
+            // Melakukan dekripsi teks
+            var decrypt = CryptoJS.AES.decrypt(encryptedText, huuu);
+            var decryptedText = decrypt.toString(CryptoJS.enc.Utf8);
+
+            // Menampilkan hasil dekripsi
+            document.getElementById("decryptedText").value = decryptedText;
+        }
+    </script>
+</body>
+</html>
