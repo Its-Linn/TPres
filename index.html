@@ -4,83 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption and Decryption Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <h2>Tools Presensi UTY - Linn</h2>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Presensi UTY Generator</h3>
+                        <p>- Linn</p>
+                        <p style="margin-bottom: 25px; font-weight: 500;">Fill in the data below.</p>
+                        <form class="requires-validation" novalidate>
+                            <div class="col-md-12">
+                               <input class="form-control" id="plainText" type="textarea" name="name" placeholder="Kode Presensi Lama" required>
+                               <div class="valid-feedback">Username field is valid!</div>
+                               <div class="invalid-feedback" id="plainTextError">Username field cannot be blank!</div>
+                            </div>
 
-    <h3>Presensi To Format Presensi:</h3>
-    <label for="encryptedText">Kode Presensi:</label><br>
-    <textarea id="encryptedText" rows="4" cols="50"></textarea><br>
-    <button onclick="decryptText()">Convert</button><br>
-    <label for="decryptedText">Hasil:</label><br>
-    <textarea id="decryptedText" rows="4" cols="50" readonly></textarea><br>
+                           <div class="col-md-12">
+                              <input class="form-control" id="newCode" type="text" placeholder="Kode Presensi Baru" onfocus="copyPlainText()" disabled>
+                           </div>
 
-    <h3>Format to Kode Presensi:</h3>
-    <p>Format presensi = kodekelas,pertemuan,tahun-bulan-tanggal,darijam(x:x),sampaijam(x:x)</p>
-    <label for="plainText">Format Presensi:</label><br>
-    <textarea id="plainText" rows="4" cols="50"></textarea><br>
-    <button onclick="encryptText()">Convert</button><br>
-    <label for="encryptedOutput">Kode Presensi:</label><br>
-    <textarea id="encryptedOutput" rows="4" cols="50" readonly></textarea><br>
+                        <button style="margin-top: 20px;background-color: 3e4179;" class="btn btn-primary" onclick="qrGenerator()">Generate</button>
 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Menyertakan pustaka CryptoJS dari CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script>
-        function huruhara() {
-            return "xwbmrperu123";
-        }
-
-        function enhuuuu(text, shift) {
-            let result = '';
-
-            for (let i = 0; i < text.length; i++) {
-                let charCode = text.charCodeAt(i);
-
-                // Check if the character is a letter
-                if (charCode >= 65 && charCode <= 90) {
-                    result += String.fromCharCode((charCode - 65 + shift) % 26 + 65);
-                } else if (charCode >= 97 && charCode <= 122) {
-                    result += String.fromCharCode((charCode - 97 + shift) % 26 + 97);
-                } else {
-                    result += text[i]; // Keep non-alphabetic characters unchanged
-                }
-            }
-
-            return result;
-        }
-
-        function dehuuuu(text, shift) {
-            // Decryption is the same as encryption, just with a reversed shift
-            return enhuuuu(text, 26 - shift);
-        }
-
-        function encryptText() {
-            var plainText = document.getElementById("plainText").value;
-            var huuuur = huruhara();
-            const shiftValue = 3;
-            var huuu = dehuuuu(huuuur, shiftValue);
-
-            // Melakukan enkripsi teks
-            var encrypted = CryptoJS.AES.encrypt(plainText, huuu).toString();
-
-            // Menampilkan hasil enkripsi
-            document.getElementById("encryptedOutput").value = encrypted;
-        }
-
-        function decryptText() {
-            var encryptedText = document.getElementById("encryptedText").value;
-            var huuuur = huruhara();
-            const shiftValue = 3;
-            var huuu = dehuuuu(huuuur, shiftValue);
-
-            // Melakukan dekripsi teks
-            var decrypt = CryptoJS.AES.decrypt(encryptedText, huuu);
-            var decryptedText = decrypt.toString(CryptoJS.enc.Utf8);
-
-            // Menampilkan hasil dekripsi
-            document.getElementById("decryptedText").value = decryptedText;
-        }
-    </script>
+    <script  src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
