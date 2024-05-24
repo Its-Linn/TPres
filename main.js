@@ -26,6 +26,24 @@ function dehuuuu(text, shift) {
     return enhuuuu(text, 26 - shift);
 }
 
+function getDate(){
+    // Mendapatkan tanggal saat ini
+var today = new Date();
+
+// Mendapatkan tahun
+var year = today.getFullYear();
+// Mendapatkan bulan (perhatikan bahwa bulan dimulai dari 0)
+var month = today.getMonth() + 1; // Ditambah 1 karena bulan dimulai dari 0
+// Mendapatkan tanggal
+var date = today.getDate();
+
+// Format tanggal, bulan, dan tahun menjadi string dengan format 'tahun-bulan-tanggal'
+var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (date < 10 ? '0' : '') + date;
+
+// Output string hasil format
+return formattedDate;
+
+}
 
 
 
@@ -48,13 +66,14 @@ function encryptText(x) {
     var waktuBaru = ('0' + currentHours).slice(-2) + ':' + ('0' + currentMinutes2).slice(-2);
 
     // Format Kode Baru
-    var newF1 = x.slice(0,3).concat(waktuSkrg,waktuBaru);
+    var newDate = getDate();
+    var newF1 = x.slice(0,2).concat(newDate,waktuSkrg,waktuBaru);
     var formatKode = newF1.join(',');
     // Melakukan enkripsi teks
     var encrypted = CryptoJS.AES.encrypt(formatKode, huuu).toString();
 
     // Menampilkan hasil enkripsi
-    console.log(waktuSkrg,waktuBaru);
+    console.log(newDate,waktuSkrg,waktuBaru);
     console.log(newF1);
     console.log(formatKode);
     return encrypted;
