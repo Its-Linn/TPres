@@ -61,9 +61,10 @@ function encryptText(x) {
     var waktuSkrg = ('0' + currentHours).slice(-2) + ':' + ('0' + currentMinutes).slice(-2);
 
     //waktu 2
-    currentTime.setMinutes(currentMinutes + 15);
-    var currentMinutes2 = currentTime.getMinutes();
-    var waktuBaru = ('0' + currentHours).slice(-2) + ':' + ('0' + currentMinutes2).slice(-2);
+    var newTime = new Date(currentTime.getTime() + 15 * 60000); // Menambah 15 menit ke waktu saat ini
+    var newHours = newTime.getHours();
+    var newMinutes = newTime.getMinutes();
+    var waktuBaru = ('0' + newHours).slice(-2) + ':' + ('0' + newMinutes).slice(-2);
 
     // Format Kode Baru
     var newDate = getDate();
